@@ -1,0 +1,11 @@
+# Keep source files consistent across Windows, Linux and macOS.
+* text=auto eol=lf
+
+# Prepared compressed datasets and images are binary assets.
+*.gz binary
+*.zip binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.webp binary
+*.ico binary

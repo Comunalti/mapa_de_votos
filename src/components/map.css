@@ -1,0 +1,178 @@
+.brazil-map { position:relative; width:100%; height:100%; min-height:0; overflow:hidden; isolation:isolate; }
+.brazil-map.is-hovered canvas { cursor:pointer; }
+.map-label-layer { position:absolute; inset:0; pointer-events:none; z-index:15; overflow:hidden; }
+.map-projected-label { position:absolute; top:0; left:0; visibility:hidden; pointer-events:none; will-change:transform; }
+.map-projected-label button { pointer-events:auto; }
+.map-region-pin { display:flex; flex-direction:column; align-items:flex-start; gap:4px; min-width:105px; padding:10px 12px; border:1px solid rgba(113,130,107,.25); border-radius:9px; background:rgba(249,251,245,.91); color:#2c3b29; box-shadow:0 4px 18px rgba(38,59,28,.05); text-align:left; white-space:nowrap; backdrop-filter:blur(12px); cursor:pointer; font-family:inherit; transition:background .2s,border-color .2s; }
+.map-region-pin:hover,.map-region-pin.is-active { background:rgba(246,255,230,.96); border-color:#8ab368; }
+.map-region-pin-name { display:flex; align-items:center; gap:5px; width:100%; font-size:7px; font-weight:700; letter-spacing:1px; line-height:1.2; }
+.map-region-pin-name i { width:4px; height:4px; border-radius:50%; background:#84a369; }
+.map-region-pin-name svg { margin-left:auto; opacity:.58; }
+.map-region-pin strong { font-size:17px; font-weight:550; line-height:1.2; letter-spacing:-.6px; }
+.map-region-pin small { color:#7c8775; font-size:7px; font-weight:400; line-height:1.3; }
+.map-region-pin:focus-visible,.map-state-label:focus-visible,.map-municipality-label:focus-visible,.map-controls button:focus-visible,.map-state-picker button:focus-visible,.map-zone-cards button:focus-visible { outline:2px solid #618e46; outline-offset:3px; }
+.map-state-label { min-width:28px; height:26px; padding:0 7px; border:1px solid rgba(125,148,109,.5); border-radius:7px; background:rgba(255,255,248,.94); box-shadow:0 3px 9px rgba(45,64,30,.1); color:#3c5430; font-family:inherit; font-size:10px; font-weight:700; cursor:pointer; }
+.map-state-label:hover,.map-state-label.is-preview { background:#e4f1d1; border-color:#7f9e68; }
+.map-municipality-label { display:flex; align-items:center; gap:7px; min-height:29px; padding:7px 10px; background:rgba(255,255,246,.95); border:1px solid #abc194; border-radius:7px; color:#3d562c; font-size:10px; font-weight:600; white-space:nowrap; box-shadow:0 3px 15px #30472612; }
+.map-municipality-label i { height:5px; width:5px; background:#8aa76f; border-radius:50%; }
+.map-municipality-label span { border-left:1px solid #dce7d1; margin-left:3px; padding-left:8px; color:#8a9b7b; font-size:8px; }
+.map-municipality-label.is-selected { background:#314b26; border-color:#314b26; color:#ecf6e3; }
+.map-municipality-label.is-selected i { background:#b3d78f; }
+.map-compass { position:absolute; top:58px; right:21px; display:flex; flex-direction:column; align-items:center; gap:5px; pointer-events:none; color:#78846f; opacity:.7; }
+.map-compass span { font-size:8px; font-weight:600; letter-spacing:1px; }
+.map-compass svg { transform:rotate(-6deg); }
+.map-controls { position:absolute; top:13px; right:13px; display:flex; align-items:center; padding:3px; background:rgba(248,250,243,.9); border:1px solid rgba(148,161,136,.3); border-radius:8px; backdrop-filter:blur(8px); z-index:30; }
+.map-controls button { display:grid; place-items:center; width:26px; height:26px; color:#58664f; padding:5px; background:transparent; border:0; border-radius:4px; cursor:pointer; }
+.map-controls button:hover { background:#e6eddd; }
+.map-controls svg { width:16px; height:16px; stroke:currentColor; fill:none; stroke-width:1.3; stroke-linecap:round; stroke-linejoin:round; }
+.map-controls i { width:1px; height:13px; background:#dce2d5; margin:0 3px; }
+.map-state-picker { position:absolute; bottom:44px; left:13px; right:13px; display:flex; align-items:flex-start; z-index:25; pointer-events:none; }
+.map-state-picker>div { display:flex; gap:5px; flex-wrap:wrap; max-width:calc(100% - 90px); pointer-events:auto; }
+.map-state-picker button { height:25px; min-width:27px; padding:0 6px; border:1px solid #cbd5c1; border-radius:5px; background:rgba(249,251,245,.94); color:#526349; cursor:pointer; font-family:inherit; font-size:9px; font-weight:600; }
+.map-state-picker button:hover { background:#e0edd1; }
+.map-preview-card { position:absolute; bottom:46px; left:13px; z-index:20; display:flex; flex-direction:column; align-items:flex-start; gap:4px; padding:10px 12px; max-width:210px; border:1px solid #d2dfc7; border-radius:8px; background:rgba(249,251,245,.9); backdrop-filter:blur(10px); pointer-events:none; box-shadow:0 5px 22px #526b3b08; }
+.brazil-map[data-level=region] .map-preview-card { bottom:81px; }
+.map-preview-card>span { color:#97a08f; font-size:7px; }
+.map-preview-card strong { color:#405735; font-size:12px; font-weight:600; }
+.map-preview-card small { color:#7b8f6c; font-size:8px; }
+.map-preview-card em { color:#9caa8f; font-size:7px; font-style:normal; }
+.map-zone-layer { position:absolute; left:13px; right:13px; bottom:44px; z-index:25; padding:10px 12px; border:1px solid #cfdcc3; border-radius:9px; background:rgba(246,250,240,.92); backdrop-filter:blur(13px); box-shadow:0 5px 20px #37552709; }
+.map-zone-heading { display:flex; align-items:center; gap:11px; margin-bottom:7px; }
+.map-zone-heading>span { font-size:9px; color:#4b6540; font-weight:650; }
+.map-zone-heading small { font-size:7px; color:#90a281; }
+.map-zone-cards { display:flex; gap:6px; overflow-x:auto; max-height:60px; scrollbar-width:thin; scrollbar-color:#bdcfae transparent; padding-bottom:3px; }
+.map-zone-cards button { flex-shrink:0; display:flex; flex-direction:column; gap:5px; min-width:70px; padding:7px 9px; text-align:left; border:1px solid #d9e3cf; border-radius:5px; background:#fbfdf7; color:#708563; }
+.map-zone-cards button>span { font-size:8px; }
+.map-zone-cards button strong { font-size:10px; font-weight:550; color:#49643b; }
+.map-zone-cards button:hover,.map-zone-cards button.is-preview { border-color:#9db88a; background:#edf5e2; }
+.map-zone-cards button.is-selected { background:#354f2b; border-color:#354f2b; color:#dceecd; }
+.map-zone-cards button.is-selected strong { color:#f2f9e9; }
+.map-zone-cards p { font-size:9px; padding:7px 0; color:#89977e; }
+.map-geometry-status { position:absolute; left:13px; bottom:45px; z-index:24; padding:8px 10px; border:1px solid #d1dcc5; border-radius:6px; background:#f4f8eeeb; font-size:9px; color:#7d8e6e; }
+.map-announcer { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; }
+.map-loading { display:flex; align-items:center; justify-content:center; flex-direction:column; height:100%; gap:14px; color:#728269; font-size:11px; }
+.map-loading p { margin:0; }
+.map-loading-orbit { width:32px; height:32px; border:1px solid #d9e2d1; border-top-color:#7f9a6b; border-radius:50%; animation:map-orbit 1.6s linear infinite; }
+@keyframes map-orbit { to { transform:rotate(360deg); } }
+.map-svg-fallback { height:100%; width:100%; position:relative; display:flex; justify-content:center; }
+.map-svg-fallback>svg { height:100%; width:100%; padding:15px; }
+.map-svg-fallback path { transition:fill .25s,opacity .25s; cursor:pointer; }
+.map-svg-fallback path:hover { fill:#c3dea6; }
+.map-fallback-regions { position:absolute; left:12px; top:50px; display:flex; flex-direction:column; gap:5px; }
+.map-fallback-regions button { padding:6px 9px; border:1px solid #ccd6c3; border-radius:5px; background:#f9fbf2e8; font-size:9px; color:#495c40; }
+@media(max-width:700px) {
+  .map-region-pin { min-width:76px; padding:7px 8px; border-radius:6px; gap:2px; }
+  .map-region-pin-name { font-size:6px; letter-spacing:.6px; gap:3px; }
+  .map-region-pin-name svg { display:none; }
+  .map-region-pin strong { font-size:13px; letter-spacing:-.4px; }
+  .map-region-pin small { font-size:6px; }
+  .map-controls { top:9px; right:9px; padding:2px; }
+  .map-controls button { width:23px; height:23px; }
+  .map-compass { top:45px; right:15px; }
+  .map-state-label { height:23px; min-width:23px; font-size:9px; padding:0 5px; }
+  .map-state-picker { left:10px; right:10px; bottom:36px; }
+  .map-state-picker>div { max-width:100%; gap:4px; }
+  .map-state-picker button { height:23px; min-width:24px; font-size:8px; }
+  .map-preview-card { bottom:37px; left:10px; padding:7px 9px; max-width:175px; gap:3px; }
+  .brazil-map[data-level=region] .map-preview-card { bottom:69px; }
+  .map-preview-card strong { font-size:10px; }
+  .map-preview-card>span,.map-preview-card em { font-size:6px; }
+  .map-preview-card small { font-size:7px; }
+  .map-municipality-label { font-size:9px; padding:6px 8px; gap:5px; }
+  .map-municipality-label span { font-size:7px; padding-left:6px; }
+  .map-zone-layer { left:10px; right:10px; bottom:35px; padding:8px 9px; }
+  .map-zone-heading { flex-direction:column; align-items:flex-start; gap:3px; margin-bottom:5px; }
+  .map-zone-heading>span { font-size:8px; }
+  .map-zone-heading small { font-size:6px; }
+  .map-zone-cards { gap:5px; max-height:53px; }
+  .map-zone-cards button { min-width:63px; padding:5px 7px; gap:3px; }
+  .map-zone-cards button>span { font-size:7px; }
+  .map-zone-cards button strong { font-size:9px; }
+  .map-geometry-status { left:10px; bottom:36px; max-width:calc(100% - 20px); font-size:8px; }
+}
+@media(prefers-reduced-motion:reduce) {
+  .map-region-pin,.map-state-label,.map-controls button,.map-svg-fallback path { transition:none; }
+  .map-loading-orbit { animation:none; }
+}
+.brazil-map[data-level=municipality] .map-geometry-status,.brazil-map[data-level=zone] .map-geometry-status { top:58px; bottom:auto; max-width:calc(100% - 155px); }
+
+
+/* The atlas shares one neutral material; teal is reserved for the active place. */
+.brazil-map { --map-control-gap: 20px; }
+.map-region-pin { min-width:116px; padding:11px 13px; gap:5px; border:1px solid #ffffffd9; border-radius:13px; background:rgba(255,255,255,.88); color:#2c453d; box-shadow:0 10px 30px #233f3212,inset 0 1px 0 #fff; backdrop-filter:blur(18px); transition:background .2s,border-color .2s,box-shadow .2s; }
+.map-region-pin:hover,.map-region-pin.is-active { background:#edf7f2f5; border-color:#80b4a1; box-shadow:0 12px 28px #275c4320; }
+.map-region-pin-name { font-size:8px; letter-spacing:.85px; }
+.map-region-pin-name i { width:5px; height:5px; background:#568e7a; }
+.map-region-pin strong { font-size:19px; }
+.map-region-pin small { font-size:8px; color:#74857d; }
+.map-state-label { display:flex; flex-direction:column; align-items:center; justify-content:center; height:auto; min-height:36px; min-width:46px; gap:3px; padding:7px 9px; background:#fffffff0; border:1px solid #ffffff; border-radius:9px; color:#365d4d; box-shadow:0 5px 18px #243c3012; }
+.map-state-label:hover,.map-state-label.is-preview { border-color:#8eb5a4; background:#ebf5eff5; }
+.map-state-metric { display:block; font-size:8px; font-weight:500; white-space:nowrap; color:#637c70; }
+.map-municipality-label { background:#ffffffed; border-color:#a1bcaf; color:#3d6050; border-radius:10px; box-shadow:0 5px 20px #29493220; font-size:11px; }
+.map-municipality-label i { background:#4c9277; }
+.map-municipality-label.is-selected { background:#276953; border-color:#276953; color:#effaf4; }
+.map-municipality-label.is-selected i { background:#9ae4c4; }
+.map-municipality-label span { border-color:#d5e6db; color:#789889; }
+.map-controls { top:215px; right:calc(var(--map-sidebar-inset,0px) + var(--map-control-gap)); padding:5px; border:1px solid #ffffffb8; border-radius:12px; background:#ffffffe6; box-shadow:0 5px 24px #243e3020; }
+.map-controls button { width:32px; height:32px; color:#4d7160; border-radius:7px; }
+.map-controls button:hover { background:#e7f1eb; }
+.map-controls button:disabled { opacity:.3; cursor:default; }
+.map-compass { top:270px; right:calc(var(--map-sidebar-inset,0px) + 38px); color:#768d80; }
+.map-state-picker { bottom:calc(var(--map-dock-height,130px) + 12px); left:24px; right:calc(var(--map-sidebar-inset,0px) + 24px); }
+.map-state-picker button { height:30px; min-width:32px; border-color:#d3e0d9; background:#fffffff0; color:#466855; border-radius:7px; font-size:10px; }
+.map-state-picker button:hover { background:#e9f4ee; border-color:#a7c4b4; }
+.map-preview-card,.brazil-map[data-level=region] .map-preview-card { bottom:calc(var(--map-dock-height,130px) + 16px); left:24px; border-color:#ffffffdc; border-radius:12px; background:#ffffffe0; box-shadow:0 5px 24px #233f3112; padding:12px 14px; }
+.brazil-map[data-level=region] .map-preview-card { bottom:calc(var(--map-dock-height,130px) + 54px); }
+.map-preview-card>span { font-size:8px; color:#8d9b94; }
+.map-preview-card strong { color:#335c48; font-size:14px; }
+.map-preview-card small { font-size:10px; color:#66826f; }
+.map-preview-card em { font-size:8px; color:#839689; }
+.map-zone-layer { left:24px; right:calc(var(--map-sidebar-inset,0px) + 24px); bottom:calc(var(--map-dock-height,130px) + 14px); padding:12px 14px; border-radius:13px; border-color:#ffffffe0; background:#ffffffe8; box-shadow:0 8px 24px #304c3212; }
+.map-zone-heading>span { font-size:10px; color:#42674f; }
+.map-zone-heading small { font-size:8px; color:#87978d; }
+.map-zone-cards { scrollbar-color:#bdcfbf transparent; max-height:70px; }
+.map-zone-cards button { min-width:90px; padding:8px 10px; border-color:#dfe9e2; border-radius:8px; color:#64816e; background:#fbfdfb; cursor:pointer; }
+.map-zone-cards button>span { font-size:9px; }
+.map-zone-cards button strong { font-size:12px; color:#3f684f; }
+.map-zone-cards button:hover,.map-zone-cards button.is-preview { background:#edf5ef; border-color:#a3c1ad; }
+.map-zone-cards button.is-selected { background:#276953; border-color:#276953; color:#d7f1e0; }
+.map-geometry-status { left:24px; bottom:calc(var(--map-dock-height,130px) + 12px); border-color:#dbe7df; color:#5f826b; background:#f8fcf8ec; border-radius:9px; font-size:10px; }
+.brazil-map[data-level=municipality] .map-geometry-status,.brazil-map[data-level=zone] .map-geometry-status { top:215px; bottom:auto; max-width:calc(100% - var(--map-sidebar-inset,0px) - 155px); }
+.map-region-pin:focus-visible,.map-state-label:focus-visible,.map-municipality-label:focus-visible,.map-controls button:focus-visible,.map-state-picker button:focus-visible,.map-zone-cards button:focus-visible { outline-color:#338565; }
+.map-svg-fallback path:hover { fill:#abc9ba; }
+.map-fallback-regions { top:215px; }
+@media(max-width:700px) {
+ .brazil-map { --map-control-gap:12px; }
+ .map-controls { top:208px; padding:3px; }
+ .map-controls button { width:27px; height:27px; }
+ .map-compass { top:255px; right:30px; }
+ .map-region-pin { min-width:80px; padding:8px 9px; gap:3px; border-radius:10px; }
+ .map-region-pin-name { font-size:6px; letter-spacing:.5px; }
+ .map-region-pin strong { font-size:14px; }
+ .map-region-pin small { font-size:6px; }
+ .map-state-label { min-height:31px; min-width:38px; gap:2px; padding:5px 6px; border-radius:7px; }
+ .map-state-metric { font-size:7px; }
+ .map-municipality-label { max-width:280px; white-space:normal; font-size:10px; }
+ .map-state-picker,.map-zone-layer,.map-preview-card,.map-geometry-status { left:12px; right:12px; }
+ .map-preview-card,.brazil-map[data-level=region] .map-preview-card { max-width:185px; right:auto; padding:9px 11px; gap:3px; }
+ .map-preview-card strong { font-size:12px; }
+ .map-preview-card small { font-size:8px; }
+ .map-zone-heading>span { font-size:9px; }
+ .map-zone-heading small { font-size:7px; }
+ .map-zone-cards button { min-width:76px; padding:7px 8px; }
+ .map-zone-cards button strong { font-size:10px; }
+ .brazil-map[data-level=municipality] .map-geometry-status,.brazil-map[data-level=zone] .map-geometry-status { top:208px; }
+}
+@media(max-height:600px) and (min-width:701px) {
+ .map-controls { top:140px; }
+ .map-compass { top:190px; }
+ .map-region-pin { min-width:98px; padding:8px 10px; gap:3px; }
+ .map-region-pin strong { font-size:16px; }
+ .map-state-picker { bottom:calc(var(--map-dock-height,90px) + 10px); }
+}
+
+
+.map-controls { top:318px; }
+.map-compass { top:373px; }
+@media(max-width:700px) { .map-controls { top:312px; } .map-compass { top:360px; } }
+@media(max-height:600px) and (min-width:701px) { .map-controls { top:242px; } .map-compass { top:294px; } }

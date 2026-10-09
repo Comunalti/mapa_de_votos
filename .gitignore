@@ -1,0 +1,34 @@
+# Dependencies and generated builds
+node_modules/
+dist/
+coverage/
+.vite/
+*.tsbuildinfo
+
+# Local test/debug artifacts and downloaded source files
+.artifacts/
+test-results/
+playwright-report/
+playwright/.cache/
+
+# Environment and machine-specific settings
+.env
+.env.*
+!.env.example
+*.local
+.codex/
+
+# Logs
+logs/
+*.log
+pnpm-debug.log*
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Editors and OS metadata
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+Desktop.ini
