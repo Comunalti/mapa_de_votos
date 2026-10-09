@@ -139,7 +139,7 @@ Esse saldo **não é uma dívida confirmada**. Receitas e despesas podem incluir
 
 ### Fundos e repasses
 
-FEFC, Fundo Partidário, recursos próprios e doações são identificados pelas classificações da fonte. Doações privadas incluem pessoas físicas e financiamento coletivo identificados; origem desconhecida permanece desconhecida.
+FEFC, Fundo Partidário, recursos próprios e doações são identificados pelas classificações da fonte. Doações privadas incluem pessoas físicas, doações pela Internet e financiamento coletivo identificados; origem desconhecida permanece desconhecida.
 
 A ficha distingue fundos recebidos do partido, recursos de outras candidaturas e doações individuais/coletivas. Esses recortes podem se sobrepor: um repasse de outra candidatura pode conter FEFC. Eles não devem ser somados novamente ao total recebido.
 

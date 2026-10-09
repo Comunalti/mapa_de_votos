@@ -27,5 +27,5 @@ export function matchesFunding(entry:FinancialEntry,fund:string){
  if(fund==='electoral-party')return source.includes('fundo especial')&&origin.includes('partido')
  if(fund==='party-party')return source.includes('fundo partid')&&origin.includes('partido')
  if(fund==='politicians')return origin.includes('candidat')
- return origin.includes('pessoas fisicas')||origin.includes('financiamento coletivo')
+ return source.includes('outros recursos')&&/pessoas? fisicas?|financiamento coletivo|doacoes pela internet/.test(origin)&&!origin.includes('proprios')
 }

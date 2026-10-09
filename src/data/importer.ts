@@ -105,7 +105,7 @@ function ingestRow(store: ImportStore, row: Row, name: string, lineKey: string):
     const key = value(row, 'SQ_RECEITA', 'SQ_RECEITA_CANDIDATO') || fingerprint(JSON.stringify(row));
     const origin = normalizedText(value(row, 'DS_ORIGEM_RECEITA'));
     const donation = source && !source.includes('OUTROS RECURSOS') ? false
-      : source && origin ? /PESSOAS? FISICAS?|FINANCIAMENTO COLETIVO/.test(origin) && !origin.includes('PROPRIOS') : null;
+      : source && origin ? /PESSOAS? FISICAS?|FINANCIAMENTO COLETIVO|DOACOES PELA INTERNET/.test(origin) && !origin.includes('PROPRIOS') : null;
     stored.receipts.set(key, { amount: receipt, fefc, donation,fp:source?source.includes('FUNDO PARTIDARIO'):null,party:origin?/PARTIDO/.test(origin)&&!/CANDIDAT/.test(origin):null,politician:origin?origin.includes('OUTROS CANDIDATOS'):null });
   }
   return true;
